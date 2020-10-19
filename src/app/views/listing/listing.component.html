@@ -1,0 +1,114 @@
+<div class="listing">
+    <div class="l-input">
+        <label>Nhập link AMZ:</label>
+        <input type="text" [(ngModel)]="linkAmz">
+        <button (click)="getDataAmz()">GET</button>
+        <button (click)="reset()">RESET</button>
+    </div>
+    <div class="l-custom">
+        <label>Nhập link ảnh main:</label>
+        <input type="text" [(ngModel)]="imgMain" placeholder="Ảnh chính hiển thị ở description">
+        <button (click)="copyHtml()">COPY DESCRIPTION</button>
+    </div>
+    <div class="l-view" #templateHTML *ngIf="showTemplate">
+        <html>
+
+        <head>
+            <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@400;600&display=swap" rel="stylesheet">
+        </head>
+
+        <body style="font-family: 'Recursive'">
+            <div class="header" style="display: flex;align-items: center;height: 250px;justify-content: space-between;">
+                <div class="logo" style="padding-left: 20px;height: 100%;display: flex;align-items: center;">
+                    <img style="max-height: 100%;" src="../../../assets/img/listing/logo.png">
+                </div>
+                <div class="sologan"
+                    style="font-size: 40pt;margin-right: 3rem;font-weight: 700;font-family: 'Dancing Script'">
+                    Stay home & We will be come to you!
+                </div>
+            </div>
+            <div class="menu"
+                style="font-size: 20px;font-weight: 700;margin: 24px 0;padding: 12px;background: hsla(0, 0%, 100%, .6);box-shadow: 0 5px 20px rgba(0, 0, 0, .4);">
+                <div class="s-menu"
+                    style="border-right: 1px solid rgba(0, 0, 0, .75);display: inline-flex;width: calc(25% - 6px);justify-content: center;align-items: center;">
+                    <a style="text-decoration: none;color: #333;" href="https://www.ebay.com/str/fishingstore40">
+                        More Product
+                    </a>
+                </div>
+                <div class="s-menu"
+                    style="border-right: 1px solid rgba(0, 0, 0, .75);display: inline-flex;width: calc(25% - 6px);justify-content: center;align-items: center;">
+                    Feedbacks
+                </div>
+                <div class="s-menu"
+                    style="border-right: 1px solid rgba(0, 0, 0, .75);display: inline-flex;width: calc(25% - 6px);justify-content: center;align-items: center;">
+                    Save this seller
+                </div>
+                <div class="s-menu"
+                    style="display: inline-flex;width: calc(25% - 6px);justify-content: center;align-items: center;">
+                    Contact
+                </div>
+            </div>
+            <div class="title"
+                style="width: 95%;margin: 0 auto;margin-top: 20px;padding: 24px 0;text-align: center;color: rgb(192, 145, 0);font-size: 32px;font-weight: 700;">
+                - {{titleProduct}} -
+            </div>
+            <div class="description" style="padding: 10px 2.5%; display: flex;justify-content: space-between;">
+                <div class="d-image" style="width: 50%;padding: 5px;">
+                    <img style="max-width: 100%;width: 100%;" src="{{imgMain}}">
+                </div>
+                <div class="d-desc" style="width: 50%;padding: 5px;border-top: 1px solid rgba(0, 0, 0, .75);">
+                    <ng-container *ngFor="let item of listDescription">
+                        <div class="d-desc-i" style="display: flex;align-items: center;margin-bottom: 10px;"
+                            *ngIf="item != ''">
+                            <img src="https://i.ibb.co/YhRp9rn/tick.png" style="width: 60px; padding-right: 5px">
+                            {{item}}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="shipping" style="margin: 40px 0;padding: 10px 2.5%;">
+                <div class="s-title" style="font-size: 30px;font-weight: 700;">Shipping</div>
+                <div class="s-img"><img style="border-radius: 6px;margin-right: 10px;"
+                        src="https://img.eselt.de/assets/templates/icons/shipping/free.png">
+                    <img style="border-radius: 6px;margin-right: 10px;"
+                        src="https://img.eselt.de/assets/templates/icons/shipping/usps.png">
+                    <img style="border-radius: 6px;margin-right: 10px;"
+                        src="https://img.eselt.de/assets/templates/icons/shipping/ups.png">
+                    <img style="border-radius: 6px;margin-right: 10px;"
+                        src="https://img.eselt.de/assets/templates/icons/shipping/fedex.png">
+                    <img style="border-radius: 6px;margin-right: 10px;"
+                        src="https://img.eselt.de/assets/templates/icons/shipping/express.png"></div>
+                <ul>
+                    <li>We offer FREE shipping on all orders!</li>
+                    <li>We ship within Three business days of payment, usually
+                        sooner.
+                    </li>
+                    <li>We use a selection of shipping services such as UPS,
+                        FedEx, USPS
+                        etc.</li>
+                    <li>We only ship to the lower 48 states, no APO/FPO
+                        addresses or PO
+                        Boxes allowed.</li>
+                    <li>Local pickups and combined shipping options are not
+                        provided at
+                        this time.</li>
+                </ul>
+            </div>
+        </body>
+
+        </html>
+    </div>
+    <div class="l-errr" *ngIf="errorGet">
+        Không thể get được sản phẩm
+    </div>
+    <div class="l-image">
+        <canvas class="canvas" #canvas></canvas>
+    </div>
+</div>
+
+<div class="overlay" *ngIf="overlayLoad">
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
+</div>
